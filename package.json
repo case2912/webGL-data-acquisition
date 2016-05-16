@@ -33,5 +33,8 @@
     "url": "git://github.com/case2912/webGL-data-acquisition.git"
   },
   "author": "case2912",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "aws-sdk": "^2.3.11"
+  }
 }
