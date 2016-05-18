@@ -10,6 +10,5 @@ module.exports = {
     var params = req.allParams();
     res.send("This is from AjaxController!");
     console.log("Post request : record is done.");
-    ajax.create(ajax.define());
   }
 };
