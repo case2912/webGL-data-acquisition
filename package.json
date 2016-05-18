@@ -36,6 +36,7 @@
   "license": "",
   "devDependencies": {
     "aws-sdk": "^2.3.11",
-    "joi": "^8.1.0"
+    "joi": "^8.1.0",
+    "node-uuid": "^1.4.7"
   }
 }

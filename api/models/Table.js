@@ -7,10 +7,10 @@
 
 var vogels = require("vogels");
 var Joi = require("joi");
-
+var uuid = require("node-uuid");
 vogels.AWS.config.loadFromPath("credentials.json");
 
-vogels.define("test", {
+var table = vogels.define("webgl_statu", {
   hashKey: "ID",
   schema: {
     ID: Joi.string(),
@@ -25,6 +25,22 @@ vogels.createTables(err => {
     console.info("DynamoDB tables was initialized without any error".green);
   }
 });
-}, (err) => {
-  console.error("Failed to load secrets.json".red, err);
-});
+
+module.exports = {
+  put : function(params) {
+    return new Promise((resolve, reject) => {
+      var id = uuid.v4();
+      table.create({
+        ID: id,
+        data: params
+      }, (err, res) => {
+        if (err) {
+          reject("Putting item was failed".red,err);
+        } else {
+          resolve();
+          console.info("without any error".green);
+        }
+      });
+    });
+  }
+};

@@ -4,11 +4,12 @@
  * @description :: Server-side logic for managing ajaxes
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var ajax = require("../models/Ajax");
+var table = require("../models/Table");
 module.exports = {
   record: (req, res) => {
     var params = req.allParams();
     res.send("This is from AjaxController!");
-    console.log("Post request : record is done.");
+    console.info("Post: record is done.".green);
+    table.put(req.allParams());
   }
 };
