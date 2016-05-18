@@ -77,7 +77,7 @@
 
   /*Get User Status*/
   var userStatus = {
-      userAgent: navigator.userAgent,
+      UserAgent: navigator.userAgent,
     }
     /*Result*/
     var xhr = new XMLHttpRequest();
