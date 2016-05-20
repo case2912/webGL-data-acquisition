@@ -12,6 +12,7 @@ vogels.AWS.config.loadFromPath("credentials.json");
 
 var table = vogels.define("webgl_statu", {
   hashKey: "ID",
+  timestamps : true,
   schema: {
     ID: Joi.string(),
     data: Joi.object()
@@ -35,10 +36,10 @@ module.exports = {
         data: params
       }, (err, res) => {
         if (err) {
-          reject("Putting item was failed".red,err);
+          reject("Unable to insert element.".red,err);
         } else {
+          console.log("Inserted element successfully.".green);
           resolve();
-          console.info("without any error".green);
         }
       });
     });

@@ -11,5 +11,8 @@ module.exports = {
     res.send("This is from AjaxController!");
     console.info("Post: record is done.".green);
     table.put(req.allParams());
+  },
+  show:(req,res) =>{
+    res.json({test:"hello"});
   }
 };

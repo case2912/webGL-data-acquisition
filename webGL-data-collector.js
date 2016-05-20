@@ -1,4 +1,7 @@
-
+ var tmp ="TESTCOOKIE=" + escape(12345) + "; ";
+ document.cookie = tmp;
+ console.log(document.cookie);
+ 
   var canvas = document.createElement("canvas");
   var gl = canvas.getContext("webgl");
 
@@ -83,7 +86,7 @@
     var xhr = new XMLHttpRequest();
     xhr.open("POST","http://localhost:1337/record/");
     xhr.addEventListener("loadend",function(){
-      console.log(xhr.response);
+      console.info(xhr.response);
     });
     xhr.send(JSON.stringify({
       status:userStatus,
