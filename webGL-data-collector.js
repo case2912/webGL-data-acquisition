@@ -1,7 +1,3 @@
- var tmp ="TESTCOOKIE=" + escape(12345) + "; ";
- document.cookie = tmp;
- console.log(document.cookie);
- 
   var canvas = document.createElement("canvas");
   var gl = canvas.getContext("webgl");
 
