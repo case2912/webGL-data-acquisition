@@ -12,10 +12,13 @@ vogels.AWS.config.loadFromPath("credentials.json");
 
 var table = vogels.define("webgl_statu", {
   hashKey: "ID",
-  timestamps : true,
+  timestamps: true,
   schema: {
     ID: Joi.string(),
-    data: Joi.object()
+    extensions: Joi.object(),
+    parameters: Joi.object(),
+    platform: Joi.object(),
+    application: Joi.object()
   }
 });
 
@@ -28,20 +31,38 @@ vogels.createTables(err => {
 });
 
 module.exports = {
-  put : function(params) {
+  put: function(extensions, parameters, platform, application) {
     return new Promise((resolve, reject) => {
       var id = uuid.v4();
       table.create({
         ID: id,
-        data: params
+        extensions: extensions,
+        parameters: parameters,
+        platform: platform,
+        application: application
       }, (err, res) => {
         if (err) {
-          reject("Unable to insert element.".red,err);
+          reject("Unable to insert element.".red, err);
         } else {
           console.log("Inserted element successfully.".green);
           resolve();
         }
       });
+    });
+  },
+  scanAll: function(){
+    return new Promise((resolve, reject) => {
+      table
+        .scan()
+        .limit(1000)
+        .loadAll()
+        .exec((err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
     });
   }
 };
