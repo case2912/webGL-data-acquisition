@@ -1,4 +1,3 @@
-
   var canvas = document.createElement("canvas");
   var gl = canvas.getContext("webgl");
 
@@ -72,7 +71,14 @@
   };
   var parametersResult = {};
   Object.keys(parameters).forEach(function(name) {
-    parametersResult[name] = gl.getParameter(parameters[name]);
+    if (name == "MAX_VIEWPORT_DIMS") {
+      var x = gl.getParameter(parameters[name]);
+      parametersResult[name + "_0"] = x[0];
+      parametersResult[name + "_1"] = x[1];
+
+    } else {
+      parametersResult[name] = gl.getParameter(parameters[name]);
+    }
   });
 
   /*Get User Status*/
@@ -80,13 +86,13 @@
       UserAgent: navigator.userAgent,
     }
     /*Result*/
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST","http://localhost:1337/record/");
-    xhr.addEventListener("loadend",function(){
-      console.log(xhr.response);
-    });
-    xhr.send(JSON.stringify({
-      status:userStatus,
-      parameters:parametersResult,
-      extensions:extensionsResult
-    }));
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost:1337/record/");
+  xhr.addEventListener("loadend", function() {
+    console.info(xhr.response);
+  });
+  xhr.send(JSON.stringify({
+    status: userStatus,
+    parameters: parametersResult,
+    extensions: extensionsResult
+  }));
