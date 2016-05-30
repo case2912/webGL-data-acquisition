@@ -1,3 +1,6 @@
+import Cookie from "js-cookie";
+import uuid from "uuid";
+export function collect() {
   var canvas = document.createElement("canvas");
   var gl = canvas.getContext("webgl");
 
@@ -79,19 +82,26 @@
       parametersResult[name] = gl.getParameter(parameters[name]);
     }
   });
-
   /*Get User Status*/
   var userStatus = {
       UserAgent: navigator.userAgent,
     }
     /*Result*/
   var xhr = new XMLHttpRequest();
+  var id = uuid.v4();
+  console.log(typeof Cookie.get("key"));
+  if ((typeof Cookie.get("key")) === "undefined") {
+    Cookie.set("key", id);
+  }
   xhr.open("POST", "http://localhost:1337/record/");
   xhr.addEventListener("loadend", function() {
     console.info(xhr.response);
   });
   xhr.send(JSON.stringify({
+    id: Cookie.get("key"),
     status: userStatus,
     parameters: parametersResult,
     extensions: extensionsResult
   }));
+  console.log(Cookie.get("key"));
+};

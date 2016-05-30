@@ -51,5 +51,8 @@ module.exports.routes = {
       origin:'*',
       method:'POST'
     }
+  },
+  'get /raw/:device/:version':{
+    target:'Ajax.list'
   }
 };

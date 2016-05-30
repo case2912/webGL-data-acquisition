@@ -7,7 +7,6 @@
 
 var vogels = require("vogels");
 var Joi = require("joi");
-var uuid = require("node-uuid");
 vogels.AWS.config.loadFromPath("credentials.json");
 
 var table = vogels.define("webgl_statu", {
@@ -33,16 +32,15 @@ vogels.createTables(err => {
 });
 
 module.exports = {
-  put: function(extensions, parameters, platform_name, platform_version, browser_name, browser_version) {
+  put: function(id,extensions, parameters, platform_name, platform_version, browser_name, browser_version) {
     return new Promise((resolve, reject) => {
-      var id = uuid.v4();
       table.create({
         ID: id,
         extensions: extensions,
         parameters: parameters,
-        platform_name: platform_name,
+        platform_name: platform_name.toLowerCase().replace(/\s/g,""),
         platform_version: platform_version,
-        browser_name: browser_name,
+        browser_name: browser_name.toLowerCase().replace(/\s/g,""),
         browser_version: browser_version
       }, (err, res) => {
         if (err) {
