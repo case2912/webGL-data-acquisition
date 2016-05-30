@@ -75,7 +75,6 @@
       var x = gl.getParameter(parameters[name]);
       parametersResult[name + "_0"] = x[0];
       parametersResult[name + "_1"] = x[1];
-
     } else {
       parametersResult[name] = gl.getParameter(parameters[name]);
     }
