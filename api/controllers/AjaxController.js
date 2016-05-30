@@ -51,7 +51,8 @@ module.exports = {
           Count[23] = result.Items[i].attrs.extensions.EXT_blend_minmax ? Count[23] + 1 : Count[23];
           Count[24] = result.Items[i].attrs.extensions.WEBGL_debug_shaders ? Count[24] + 1 : Count[24];
         }
-        res.json({"ItemCount": result.Count,"parametersCount" : Count});
+      //  res.json({"ItemCount": result.Count,"parametersCount" : Count});
+      res.json(result.Items[0].attrs.parameters)
       }, function(err) {
         res.json(err);
       });
