@@ -15,14 +15,21 @@ module.exports = {
     var ua = parser(JSON.stringify(params.status));
     table.put(params.extensions, params.parameters, ua.os.name,ua.os.version, ua.browser.name, ua.browser.major);
   },
+  show:function(req, res){
+    res.send("<h1>hello world<h1>");
+  },
   list: function(req, res) {
-    table.scan("Chrome","50")
+    var browser_name = "Chrome";
+    var browser_version = "50";
+    table.scan(browser_name,browser_version)
       .then(function(result) {
         var extensions_count = statistics.extensions_count(result);
         var parameters_max = statistics.parameters_max(result);
         var parameters_min = statistics.parameters_min(result);
         var parameters_average = statistics.parameters_average(result);
         res.json({
+          "browser_name":browser_name,
+          "browser_version":browser_version,
           "item_count": result.Count,
           "extensions_count": extensions_count,
           "parameters_max": parameters_max,
