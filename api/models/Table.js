@@ -17,8 +17,10 @@ var table = vogels.define("webgl_statu", {
     ID: Joi.string(),
     extensions: Joi.object(),
     parameters: Joi.object(),
-    platform: Joi.object(),
-    application: Joi.object()
+    platform_name: Joi.string(),
+    platform_version: Joi.string(),
+    browser_name: Joi.string(),
+    browser_version: Joi.string()
   }
 });
 
@@ -31,15 +33,17 @@ vogels.createTables(err => {
 });
 
 module.exports = {
-  put: function(extensions, parameters, platform, application) {
+  put: function(extensions, parameters, platform_name, platform_version, browser_name, browser_version) {
     return new Promise((resolve, reject) => {
       var id = uuid.v4();
       table.create({
         ID: id,
         extensions: extensions,
         parameters: parameters,
-        platform: platform,
-        application: application
+        platform_name: platform_name,
+        platform_version: platform_version,
+        browser_name: browser_name,
+        browser_version: browser_version
       }, (err, res) => {
         if (err) {
           reject("Unable to insert element.".red, err);
@@ -50,11 +54,14 @@ module.exports = {
       });
     });
   },
-  scanAll: function(){
+  scan: function(name,version) {
     return new Promise((resolve, reject) => {
       table
         .scan()
-        .limit(1000)
+        .where('browser_name')
+        .equals(name)
+        .where('browser_version')
+        .equals(version)
         .loadAll()
         .exec((err, data) => {
           if (err) {

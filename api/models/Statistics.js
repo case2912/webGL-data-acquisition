@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  extensions_count : function(result){
+  extensions_count: function(result) {
     var extensions_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (var i = 0; i < result.Count; i++) {
       extensions_count[0] = result.Items[i].attrs.extensions.OES_texture_float_linear ? extensions_count[0] + 1 : extensions_extensions_count[0];
@@ -37,7 +37,7 @@ module.exports = {
     }
     return extensions_count;
   },
-  parameters_max:function(result){
+  parameters_max: function(result) {
     var parameters_max = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (var i = 0; i < result.Count; i++) {
       parameters_max[0] = parameters_max[0] < result.Items[i].attrs.parameters.MAX_TEXTURE_SIZE ? result.Items[i].attrs.parameters.MAX_TEXTURE_SIZE : parameters_max[0];
@@ -55,7 +55,7 @@ module.exports = {
     }
     return parameters_max;
   },
-  parameters_min:function(result){
+  parameters_min: function(result) {
     var parameters_min = [Infinity, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity, Infinity];
     for (var i = 0; i < result.Count; i++) {
       parameters_min[0] = parameters_min[0] > result.Items[i].attrs.parameters.MAX_TEXTURE_SIZE ? result.Items[i].attrs.parameters.MAX_TEXTURE_SIZE : parameters_min[0];
@@ -73,7 +73,7 @@ module.exports = {
     }
     return parameters_min;
   },
-  parameters_average:function(result){
+  parameters_average: function(result) {
     var parameters_average = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var total = 0;
     for (var i = 0; i < result.Count; i++) {

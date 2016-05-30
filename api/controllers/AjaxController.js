@@ -13,10 +13,10 @@ module.exports = {
     res.send("This is from AjaxController!");
     console.info("Post: record is done.".green);
     var ua = parser(JSON.stringify(params.status));
-    table.put(params.extensions, params.parameters, ua.os, ua.browser);
+    table.put(params.extensions, params.parameters, ua.os.name,ua.os.version, ua.browser.name, ua.browser.major);
   },
   list: function(req, res) {
-    table.scanAll()
+    table.scan("Chrome","50")
       .then(function(result) {
         var extensions_count = statistics.extensions_count(result);
         var parameters_max = statistics.parameters_max(result);
@@ -29,7 +29,6 @@ module.exports = {
           "parameters_min": parameters_min,
           "parameters_average": parameters_average
         });
-        res.json(result.Items[0].attrs.parameters)
       }, function(err) {
         res.json(err);
       });
