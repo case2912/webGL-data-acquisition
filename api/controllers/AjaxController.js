@@ -13,7 +13,7 @@ module.exports = {
     res.send("This is from AjaxController!");
     console.info("Post: record is done.".green);
     var ua = parser(JSON.stringify(params.status));
-    table.put(params.id, params.extensions, params.parameters, ua.os.name, ua.os.version, ua.browser.name, ua.browser.major);
+    table.put(params.id,params.domain, params.extensions, params.parameters, ua.os.name, ua.os.version, ua.browser.name, ua.browser.major);
   },
   list: function(req, res) {
     var browser_name = req.param("device");

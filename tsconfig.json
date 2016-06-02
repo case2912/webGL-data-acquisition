@@ -1,0 +1,23 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es6",
+        "declaration": false,
+        "sourceMap": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": false,
+        "moduleResolution": "node"
+    },
+    "filesGlob": [
+        "./api/**/*.ts",
+        "!./**/*.d.ts",
+        "!./node_modules/"
+    ],
+    "files": [
+        "./api/controllers/TagController.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

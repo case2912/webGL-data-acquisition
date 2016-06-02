@@ -14,6 +14,7 @@ var table = vogels.define("webgl_statu", {
   timestamps: true,
   schema: {
     ID: Joi.string(),
+    domain:Joi.string(),
     extensions: Joi.object(),
     parameters: Joi.object(),
     platform_name: Joi.string(),
@@ -32,15 +33,16 @@ vogels.createTables(err => {
 });
 
 module.exports = {
-  put: function(id,extensions, parameters, platform_name, platform_version, browser_name, browser_version) {
+  put: function(id,domain, extensions, parameters, platform_name, platform_version, browser_name, browser_version) {
     return new Promise((resolve, reject) => {
       table.create({
         ID: id,
+        domain:domain,
         extensions: extensions,
         parameters: parameters,
-        platform_name: platform_name.toLowerCase().replace(/\s/g,""),
+        platform_name: platform_name.toLowerCase().replace(/\s/g, ""),
         platform_version: platform_version,
-        browser_name: browser_name.toLowerCase().replace(/\s/g,""),
+        browser_name: browser_name.toLowerCase().replace(/\s/g, ""),
         browser_version: browser_version
       }, (err, res) => {
         if (err) {
@@ -52,22 +54,36 @@ module.exports = {
       });
     });
   },
-  scan: function(name,version) {
+  scan: function(name, version) {
     return new Promise((resolve, reject) => {
-      table
-        .scan()
-        .where('browser_name')
-        .equals(name)
-        .where('browser_version')
-        .equals(version)
-        .loadAll()
-        .exec((err, data) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(data);
-          }
-        });
+      if (typeof name === "undefined" || typeof version === "undefined") {
+        table
+          .scan()
+          .loadAll()
+          .exec((err, data) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(data);
+            }
+          });
+      } else {
+        table
+          .scan()
+          .where('browser_name')
+          .equals(name)
+          .where('browser_version')
+          .equals(version)
+          .loadAll()
+          .exec((err, data) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(data);
+            }
+          });
+      }
+
     });
   }
 };

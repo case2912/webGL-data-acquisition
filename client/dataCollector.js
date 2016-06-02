@@ -86,22 +86,23 @@ export function collect() {
   var userStatus = {
       UserAgent: navigator.userAgent,
     }
+  /*Get Domain*/
+  var domain = document.domain;
     /*Result*/
   var xhr = new XMLHttpRequest();
   var id = uuid.v4();
-  console.log(typeof Cookie.get("key"));
   if ((typeof Cookie.get("key")) === "undefined") {
     Cookie.set("key", id);
   }
-  xhr.open("POST", "http://localhost:1337/record/");
+  xhr.open("POST", "http://10.32.218.191:1337/record/");
   xhr.addEventListener("loadend", function() {
     console.info(xhr.response);
   });
   xhr.send(JSON.stringify({
     id: Cookie.get("key"),
+    domain: domain,
     status: userStatus,
     parameters: parametersResult,
     extensions: extensionsResult
   }));
-  console.log(Cookie.get("key"));
 };
