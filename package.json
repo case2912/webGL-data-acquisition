@@ -24,6 +24,7 @@
     "aws-sdk": "^2.3.11",
     "joi": "^8.1.0",
     "koa": "^1.2.0",
+    "koa-route": "^2.4.2",
     "rollup": "^0.26.3",
     "rollup-plugin-typescript": "^0.7.5",
     "typings": "^1.0.4",
