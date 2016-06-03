@@ -158,3 +158,13 @@ credentials.json
 
 #bundling
 bundle.js
+
+#dist
+dist
+
+#typings
+typings
+
+#ts
+src/ts/*.js
+src/ts/*.map
