@@ -20,15 +20,12 @@
         "placeOpenBraceOnNewLineForControlBlocks": true
     },
     "compileOnSave": false,
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts",
-        "!./bower_components/**/*.ts",
-        "!./typings/**/*.ts"
+    "fileGlob": [
+        "./src/**/*.{ts,tsx}"
     ],
-    "files": [
-        "./src/ts/client.ts",
-        "./src/ts/target.ts"
+    "exclude": [
+        "node_modules",
+        "typings"
     ],
     "atom": {
         "rewriteTsconfig": true

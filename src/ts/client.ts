@@ -1,10 +1,11 @@
-/// <reference path="../../typings/index.d.ts" />
-import {v4} from "node-uuid";
+/// <reference path="./../../typings/tsd.d.ts" />
 import target from "./target";
-const collecter = () => {
+import uuid from "./uuid";
+import * as cookie from "js-cookie";
+const collector = () => {
     const canvas = document.createElement("canvas");
-    const gl = this.canvas.getContext("webgl");
-    const extensionsResult: { [key: string]: boolean } = {};
+    const gl = <WebGLRenderingContext>canvas.getContext("webgl");
+    const extensionsResult = {};
     for (let i = 0; i < target.extensions.length; i++) {
         extensionsResult[target.extensions[i]] = gl.getExtension(target.extensions[i]) !== null;
     }
@@ -42,14 +43,22 @@ const collecter = () => {
     const user = {
         status: navigator.userAgent
     };
-    const id = v4();
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:1337/record/");
-    xhr.send(JSON.stringify({
+    const id = uuid();
+    cookie.set("key", id);
+    console.log(cookie.get("key"));
+    console.log({
         id: id,
-        status: status,
+        user: user,
         extensions: extensionsResult,
         parameters: parametersResult
-    }));
+    });
+    // const xhr = new XMLHttpRequest();
+    // xhr.open("POST", "http://localhost:3000/record/");
+    // xhr.send(JSON.stringify({
+    //     id: id,
+    //     status: status,
+    //     extensions: extensionsResult,
+    //     parameters: parametersResult
+    // }));
 };
-collecter();
+collector();

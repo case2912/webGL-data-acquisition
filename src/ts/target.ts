@@ -1,4 +1,3 @@
-
 class Target {
     static extensions: string[] = [
         "ANGLE_instanced_arrays",
