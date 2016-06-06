@@ -161,6 +161,7 @@ bundle.js
 
 # dest
 dest
+lib
 
 # typings
 typings

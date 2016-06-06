@@ -1,11 +1,18 @@
+import nodeResolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+import babel from 'rollup-plugin-babel';
+import uglify from 'rollup-plugin-uglify';
 import typescript from 'rollup-plugin-typescript';
-
 export default {
-    entry: './src/ts/controller.ts',
-    dest: './dest/app.js',
-    format: 'es6',
-    sourceMap:true,
+    entry: 'src/ts/client.ts',
+    dest: 'dest/bundle.js',
     plugins: [
-        typescript()
+        typescript(),
+        nodeResolve({
+            jsnext: true
+        }),
+        commonjs(),
+        babel(),
+        uglify()
     ]
 }

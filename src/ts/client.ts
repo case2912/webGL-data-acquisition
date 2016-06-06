@@ -1,7 +1,6 @@
-/// <reference path="./../../typings/tsd.d.ts" />
 import target from "./target";
 import uuid from "./uuid";
-import * as cookie from "js-cookie";
+import cookie from "./cookie";
 const collector = () => {
     const canvas = document.createElement("canvas");
     const gl = <WebGLRenderingContext>canvas.getContext("webgl");
@@ -30,10 +29,10 @@ const collector = () => {
     if (isSupported) {
         extensionsResult["WEBGL_color_buffer_float"] = isSupported;
     }
-    const parametersResult: { [key: string]: number } = {};
+    const parametersResult = {};
     for (let i = 0; i < target.parameters.length; i++) {
         if (target.parameters[i] === "MAX_VIEWPORT_DIMS") {
-            let temp = gl.getParameter(gl[target.parameters[i]]);
+            const temp = gl.getParameter(gl[target.parameters[i]]);
             parametersResult[target.parameters[i] + "_0"] = temp[0];
             parametersResult[target.parameters[i] + "_1"] = temp[1];
         } else {
@@ -43,9 +42,8 @@ const collector = () => {
     const user = {
         status: navigator.userAgent
     };
-    const id = uuid();
+    const id = cookie.get("key") === null ? uuid() : cookie.get("key");
     cookie.set("key", id);
-    console.log(cookie.get("key"));
     console.log({
         id: id,
         user: user,
