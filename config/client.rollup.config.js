@@ -8,15 +8,16 @@ export default {
     dest: 'dest/bundle.js',
     plugins: [
         typescript(),
-        nodeResolve({
-            jsnext: true
-        }),
-        commonjs(),
-        babel({
-          babelrc: false,
-          exclude: 'node_modules/**',
-          presets: [ 'es2015-rollup']
-        }),
+        // nodeResolve({
+        //     jsnext: true
+        // }),
+         commonjs(),
+         babel({
+           presets: ['es2015-rollup']
+         }),
+        // babel({
+        //     presets: ['es2015-rollup']
+        // }),
         uglify()
     ],
     sourceMap: true

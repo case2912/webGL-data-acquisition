@@ -7,8 +7,8 @@
   "scripts": {
     "client": "$(npm bin)/rollup -c config/client.rollup.config.js",
     "index": "$(npm bin)/rollup -c config/index.rollup.config.js",
-    "build": "$(npm bin)/babel src/api -d lib",
-    "start": "babel-node lib/controller.js"
+    "build": "$(npm bin)/babel src/api -d lib --presets es2015",
+    "start": "node lib/controller.js"
   },
   "repository": {
     "type": "git",
