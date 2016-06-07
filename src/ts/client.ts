@@ -44,12 +44,14 @@ const collector = () => {
     };
     const id = cookie.get("key") === null ? uuid() : cookie.get("key");
     cookie.set("key", id);
-    console.log({
+    const data = {
         id: id,
         user: user,
         extensions: extensionsResult,
         parameters: parametersResult
-    });
+    };
+    document.write(JSON.stringify(data));
+    console.log(data);
     // const xhr = new XMLHttpRequest();
     // xhr.open("POST", "http://localhost:3000/record/");
     // xhr.send(JSON.stringify({
