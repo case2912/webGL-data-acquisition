@@ -53,7 +53,7 @@ const collector = () => {
     document.write(JSON.stringify(data));
     console.log(data);
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:3000/test/");
+    xhr.open("POST", "http://localhost:3000/record/");
     xhr.send(JSON.stringify({
         id: id,
         status: status,
