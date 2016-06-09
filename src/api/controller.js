@@ -15,11 +15,20 @@ const app = new koa();
 //    console.log(ctx);
 // }
 
-router.get('/test', function(ctx, next) {
+async function corsAccept(ctx,next){
+  await next();
+  ctx.response.set("Access-Control-Allow-Origin","*");
+  ctx.response.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  ctx.response.set('Access-Control-Allow-Headers', 'Content-Type');
+}
+
+router.post('/test', function(ctx, next) {
     ctx.body = 'Hello World!';
+    console.log(ctx);
 });
 app.listen(3000);
 app
+    .use(corsAccept)
     .use(router.routes())
-    .use(router.allowedMethods())
+    .use(router.allowedMethods());
 console.log('listening on port 3000');

@@ -11,10 +11,10 @@ export default {
         // nodeResolve({
         //     jsnext: true
         // }),
-         commonjs(),
-         babel({
-           presets: ['es2015-rollup']
-         }),
+        commonjs(),
+        babel({
+            presets: ['es2015-rollup']
+        }),
         // babel({
         //     presets: ['es2015-rollup']
         // }),
