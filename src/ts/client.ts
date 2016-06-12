@@ -39,9 +39,7 @@ const collector = () => {
             parametersResult[target.parameters[i]] = gl.getParameter(gl[target.parameters[i]]);
         }
     }
-    const user = {
-        status: navigator.userAgent
-    };
+    const user = navigator.userAgent;
     const id = cookie.get("key") === null ? uuid() : cookie.get("key");
     cookie.set("key", id);
     const data = {
@@ -50,15 +48,11 @@ const collector = () => {
         extensions: extensionsResult,
         parameters: parametersResult
     };
-    document.write(JSON.stringify(data));
     console.log(data);
     const xhr = new XMLHttpRequest();
+
     xhr.open("POST", "http://localhost:3000/record/");
-    xhr.send(JSON.stringify({
-        id: id,
-        status: status,
-        extensions: extensionsResult,
-        parameters: parametersResult
-    }));
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(data));
 };
 collector();
