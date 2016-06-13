@@ -46,11 +46,10 @@ const collector = () => {
         id: id,
         user: user,
         extensions: extensionsResult,
-        parameters: parametersResult
+        parameters: parametersResult,
+        domain: document.domain
     };
-    console.log(data);
     const xhr = new XMLHttpRequest();
-
     xhr.open("POST", "http://localhost:3000/record/");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(data));
