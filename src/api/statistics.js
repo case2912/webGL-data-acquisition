@@ -27,3 +27,14 @@ export const parameters_max = (result) => {
     }
     return max;
 }
+export const parameters_average = (result) => {
+    var average = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var total = 0;
+    for (let i = 0; i < result.Count; i++) {
+        for (var j = 0; j < Targets.parameters.length; j++) {
+            average[j] += (result.Items[i].attrs.parameters[Targets.parameters[j]] - average[j]) / (total + 1);
+        }
+        total = total + 1;
+    }
+    return average;
+}
