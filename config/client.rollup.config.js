@@ -5,12 +5,9 @@ import uglify from 'rollup-plugin-uglify';
 import typescript from 'rollup-plugin-typescript';
 export default {
     entry: 'src/ts/client.ts',
-    dest: 'dest/bundle.js',
+    dest: 'dest/client.bundle.js',
     plugins: [
         typescript(),
-        // nodeResolve({
-        //     jsnext: true
-        // }),
         commonjs(),
         babel({
             presets: ['es2015-rollup']
