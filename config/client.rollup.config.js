@@ -15,9 +15,6 @@ export default {
         babel({
             presets: ['es2015-rollup']
         }),
-        // babel({
-        //     presets: ['es2015-rollup']
-        // }),
         uglify()
     ],
     sourceMap: true
