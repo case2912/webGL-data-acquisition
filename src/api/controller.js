@@ -17,16 +17,33 @@ router.options('/record', async function(ctx, next) {
     ctx.response.set("Access-Control-Allow-Origin", "*");
     ctx.response.set("Access-Control-Allow-Headers", "Content-Type");
 });
-router.get('/list',async function(ctx, next) {
-    const result = await db.scan();
-    ctx.response.body = result;
+router.get('/list', async function(ctx, next) {
+    // const result = await db.scan();
+    // ctx.response.body = result;
+
+    // const p = new Promise(function(resolve,reject){
+    //   db.scan().then(function(result){
+    //     resolve(JSON.stringify(result));
+    //   });
+    // });
+    // ctx.response.body = p;
+
+    // ctx.response.body = db.scan().then(function(result) {
+    //   console.log(result);
+    //     return result;
+    // });
+    // db.scan().then(function(result) {
+    //     console.log(result);
+    //     ctx.response.body = result;
+    // });
+    ctx.response.body = db.scan();
 });
 router.get('/show', async function(ctx, next) {
     const result = await db.scan();
     ctx.response.body = {
-      count:statistics.extensions_count(result),
-      min:statistics.parameters_min(result),
-      max:statistics.parameters_max(result)
+        count: statistics.extensions_count(result),
+        min: statistics.parameters_min(result),
+        max: statistics.parameters_max(result)
     };
 });
 
